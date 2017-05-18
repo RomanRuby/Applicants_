@@ -1,0 +1,61 @@
+.spinner {
+    text-align: center;
+    font-size: 60pt;
+}
+
+body {
+    min-height: 2000px;
+    padding-top: 40px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.jumbotron {
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.info tr {
+    height: 55px;
+}
+
+.info td {
+    vertical-align: middle !important;
+}
+
+.binding {
+    height: 40px;
+}
+
+a.editable-click { border-bottom: none;}
+
+body {
+    background: rgba(35, 57, 156, 0.28);
+}
+.jumbotron
+{
+
+    background: rgba(35, 57, 156, 0.28);
+}
+
+
+
+.table_bg td{
+
+    border: dashed 1px #DF7000;
+    background: rgba(60, 0, 255, 0);
+    color: #03000e;
+
+}
+.table_bg thead{
+    border: dashed 1px #DF7000;
+    background: rgba(60, 0, 255, 0);
+    color: #60bce8;
+
+}

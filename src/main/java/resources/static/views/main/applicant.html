@@ -1,0 +1,182 @@
+<div class="container">
+    <div class="jumbotron">
+
+
+        <h3> <tr>
+            <td class="width20">Фамилия</td>
+           <a href="#" editable-text="applicant.secondName"
+               onbeforesave="updateApplicant($data)">{{ applicant.secondName || "Введите фамилию" }}
+            </a>
+            <td class="width20">Имя</td>
+            <td>
+                <a href="#" editable-text="applicant.firstName"
+                   onbeforesave="updateApplicant($data)">{{ applicant.firstName || "Введите имя" }}
+                </a>
+            </td>
+        </tr>
+        </h3>
+        <div class="row">
+
+            <!-- applicant info-->
+            <div class="col-md-6">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        <h3 class="panel-title">Информация</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        <table class="table table-hover info">
+
+                            <tr>
+                                <td class="width20">Дата рождения</td>
+                                <td>
+                                    <a href="#" editable-date="applicant.birthDate"
+                                       onbeforesave="updateApplicant($data)">{{ applicant.birthDate || "Дата рождения"| date }}
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="width20">Ссылка на резюме</td>
+                                <td>
+                                    <a href="#" editable-text="applicant.referenceResume"
+                                       onbeforesave="updateApplicant($data)" >{{ applicant.referenceResume || "Ссылка на резюме"  }}
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td  class="width20"> <button type="button" class="btn glyphicon glyphicon-folder-close "  ng-click="deleteApplicant()">Удалить</button></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        <h3 class="panel-title">Информация об вакансии</h3>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover info">
+                            <tr>
+                                <td class="width20">Вакансия</td>
+                                    <td>{{applicant.vacancy.name}}</td>
+                            </tr>
+                            <tr>
+                                <td class="width20">Зарплата</td>
+                                <td>
+                                    {{ applicant.vacancy.salary || "Зарплата" | currency : "BYN" }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="width20">Офис</td>
+                                     <td>{{applicant.office.name }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="container">
+        <div class="col-md-">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Сведения об интервью</h3>
+                </div>
+                <div class="panel-body">
+                    <a class="btn btn-primary" data-toggle="modal" data-target="#modalAddInterview" ng-click="">
+                        <i class="fa fa-user-plus"></i> Добавить интервью</a>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th>Статус</th>
+                            <th>Описание</th>
+                            <th>Дата проведения</th>
+                            <th>Дата изменения</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="interview in interviews | filter:simpleFilter">
+                            <td>
+                                <a href="#" editable-text="interview.status.name"
+                                   onbeforesave="updateInterview($data)"> {{interview.status.name}}
+                                </a>
+                            </td>
+
+                            <td>
+                                <a href="#" editable-text="interview.description"
+                                   onbeforesave="updateInterview($data)" >{{interview.description}}
+                                </a>
+                            </td>
+                            <td>{{interview.eventDate  | date:'yyyy-MM-dd HH:mm:ss '}}</td>
+                            <td>{{interview.creationDate| date:'yyyy-MM-dd HH:mm:ss '}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <!-- Modal to add applicants -->
+                    <div class="modal fade" id="modalAddInterview" tabindex="-1" role="dialog" aria-labelledby="modalAddLabel"
+                         data-backdrop="static">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button  type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span
+                                            aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="modalAddLabel">Интервью</h4>
+                                </div>
+                                <form ng-submit="addInterview()">
+
+                                    <div class="modal-body">
+                                        <div class="spinner" ng-show="newInterview.loading">
+                                            <i class="fa fa-cog fa-spin"></i>
+                                        </div>
+
+                                        <div ng-show="!Interview.loading">
+                                            <div class="form-group" name="text" ng-class="{'has-error': br.text}">
+                                                <label>Статус</label>
+
+                                                <select id="selectcolor" ng-model="newInterview.status.id" class="form-control">
+                                                    <option value="">Выберете статус</option>
+                                                    <option  ng-repeat="status in statuses " value="{{status.id}}">{{status.name}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group" ng-class="{'has-error': br.eventDate}">
+                                                <label>Дата проведения</label>
+                                                <input type="datetime-local" class="form-control" placeholder="Дата проведения"
+                                                       ng-model="newInterview.eventDate">
+                                                <span class="help-block" ng-if="br.eventDate">{{br.eventDate }}</span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Описание</label>
+                                                <textarea class="form-control" name="" rows="4" placeholder="Описание"
+                                                          autofocus="true"
+                                                          ng-model="newInterview.description"></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" ng-click="resetForm()" data-dismiss="modal">
+                                            Закрыть
+                                        </button>
+                                        <button type="submit" class="btn btn-default">Сохранить</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+</div>
+</div>

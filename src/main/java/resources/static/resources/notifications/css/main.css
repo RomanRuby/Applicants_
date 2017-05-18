@@ -1,0 +1,36 @@
+.spinner {
+    text-align: center;
+    font-size: 60pt;
+}
+
+body {
+    min-height: 2000px;
+    padding-top: 40px;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.jumbotron {
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+.width20 {
+    width: 20%;
+}
+
+.info tr {
+    height: 55px;
+}
+
+.info td {
+    vertical-align: middle !important;
+}
+
+.binding {
+    height: 40px;
+}
+
+a.editable-click { border-bottom: none;}

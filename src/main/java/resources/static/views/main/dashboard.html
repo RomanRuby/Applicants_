@@ -1,0 +1,175 @@
+<div class="container">
+
+    <div class="jumbotron">
+        <meta charset="utf-8">
+        <h3 class="sub-header">Кандидаты</h3>
+
+
+        <div class="spinner" ng-show="loading">
+            <i class="fa fa-cog fa-spin"></i>
+        </div>
+        <div class="panel panel-default" ng-show="!loading">
+            <div class="panel-heading">
+                <a class="btn btn-primary" data-toggle="modal" data-target="#modalAddApplicant" ng-click="">
+                    <i class="fa fa-user-plus"></i> Добавить</a>
+            </div>
+                <div>
+                    <input type="text" class="form-control" placeholder="Поиск" ng-model="searchType">
+                </div>
+
+
+            <div class="panel-body">
+
+                <table class="table   table-bordered table-striped ">
+                    <thead>
+                    <tr>
+                        <td>
+                            <a href="#/dashboard"  ng-click="sortType = 'secondName'; sortReverse = !sortReverse">
+                                Фамилия
+                                <span ng-show="sortType == 'secondName' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'secondName' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard" ng-click="sortType = 'firstName'; sortReverse = !sortReverse">
+                                Имя
+                                <span ng-show="sortType == 'firstName' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'firstName' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard" ng-click="sortType = 'office.code'; sortReverse = !sortReverse">
+                                   Офис
+                                <span ng-show="sortType == 'office.code' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'office.code' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard" ng-click="sortType = 'vacancy.name'; sortReverse = !sortReverse">
+                                Вакансия
+                                <span ng-show="sortType == 'vacancy.name' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'vacancy.name' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard"  ng-click="sortType = 'vacancy.salary'; sortReverse = !sortReverse">
+                                Зарплата
+                                <span ng-show="sortType == 'vacancy.salary' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'vacancy.salary' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard" ng-click="sortType = 'referenceResume'; sortReverse = !sortReverse">
+                                Ссылка на резюме
+                                <span ng-show="sortType == 'referenceResume' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'referenceResume' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#/dashboard"  ng-click="sortType = 'vacancy.description'; sortReverse = !sortReverse">
+                                Дополнительная информация
+                                <span ng-show="sortType == 'vacancy.description' && !sortReverse" class="fa fa-caret-down"></span>
+                                <span ng-show="sortType == 'vacancy.description' && sortReverse" class="fa fa-caret-up"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="applicant in applicants | orderBy:sortType:sortReverse | filter:searchType">
+                        <td>
+                            <a ng-href="#/applicants/{{applicant.id}}">{{applicant.secondName}}</a>
+                        </td>
+                        <td>{{applicant.firstName}}</td>
+                        <td>{{applicant.office.name}}</td>
+                        <td>{{applicant.vacancy.name}}</td>
+                        <td>{{applicant.vacancy.salary}}</td>
+                        <td>{{applicant.referenceResume }}</td>
+                        <td>{{applicant.vacancy.description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Modal to add applicants -->
+        <div class="modal fade" id="modalAddApplicant" tabindex="-1" role="dialog" aria-labelledby="modalAddLabel"
+             data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span
+                                aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="modalAddLabel">Добовление  кандидата</h4>
+                    </div>
+                    <form ng-submit="addApplicant()">
+                        <div class="modal-body">
+                            <div class="spinner" ng-show="newApplicant.loading">
+                                <i class="fa fa-cog fa-spin"></i>
+                            </div>
+                            <div ng-show="!Applicant.loading">
+                                <div class="form-group" ng-class="{'has-error': br.secondName}">
+                                    <label>Имя</label>
+                                    <input type="text" class="form-control" placeholder="Имя"
+                                           ng-model="newApplicant.firstName">
+                                    <span class="help-block" ng-if="br.firstName">{{br.firstName}}</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.secondName}">
+                                    <label>Фамилия</label>
+                                    <input type="text" class="form-control" placeholder="Фамилия"
+                                           ng-model="newApplicant.secondName">
+                                    <span class="help-block" ng-if="br.secondName">{{br.secondName}}</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.birthDate}">
+                                    <label>Дата рождения</label>
+                                    <input type="date" class="form-control" placeholder="Возраст"
+                                           ng-model="newApplicant.birthDate">
+                                    <span class="help-block" ng-if="br.birthDate">{{br.birthDate}}</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': referenceResume}">
+                                    <label>Ссылка на резюме</label>
+                                    <input type="text" class="form-control" placeholder="Ссылка на резюме"
+                                           ng-model="newApplicant.referenceResume">
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.office}">
+                                    <label>Офис</label>
+                                    <select   ng-model="newApplicant.office.id" class="form-control">
+                                        <option value="">Выберете офис</option>
+                                        <option  ng-repeat="office in offices " value="{{office.id}}  "> {{office.name}} </option>
+                                    </select>
+                                    <span class="help-block" ng-if="br.office">{{br.office}}</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.vacancy.name}">
+                                    <label>Вакансия</label>
+                                    <select   ng-model="newApplicant.vacancy.id" class="form-control">
+                                        <option value="">Вакансия </option>
+                                        <option  ng-repeat="vacancy in vacancies " value="{{vacancy.id}}  "> {{vacancy.name}} </option>
+                                    </select>
+                                        <span class="help-block" ng-if="br.vacancy.id">{{br.vacancy.name }}</span>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.vacancy.salary}">
+                                    <label>Желаемая зарплата</label>
+                                    <input type="number" class="form-control" placeholder="Желаемая зарплата : BYN "
+                                           ng-model="newApplicant.vacancy.salary">
+                                </div>
+                                <div class="form-group" ng-class="{'has-error': br.vacancy.description}">
+                                    <label>Дополнительная информация</label>
+                                    <textarea class="form-control" name="comment" rows="4" placeholder="Дополнительная информация"
+                                              autofocus="true"
+                                              ng-model="newApplicant.vacancy.description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" ng-click="resetForm()" data-dismiss="modal">
+                                Закрыть
+                            </button>
+                            <button type="submit" class="btn btn-default">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
