@@ -22,8 +22,7 @@ import java.util.Date;
 @Component
 public class LoggingHandler {
 
-	@Autowired
-	private ObjectMapper objectMapper;
+	@Autowired private ObjectMapper objectMapper;
 
 	@Pointcut(value = "@annotation(cushing.Loggable)")
 	public void methodLoggable() {}

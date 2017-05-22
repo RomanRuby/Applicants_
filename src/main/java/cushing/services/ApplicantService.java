@@ -11,13 +11,19 @@ import java.util.List;
  */
 public interface ApplicantService {
 
-    @Nullable Applicant get(@NotNull Long id);
+    @Nullable
+    Applicant get(@NotNull Long id);
 
-    @Nullable Applicant save(@NotNull Applicant applicant);
+    @Nullable
+    Applicant save(@NotNull Applicant applicant);
 
-    @Nullable Applicant update(@NotNull Applicant applicant);
+    @Nullable
+    Applicant update(@NotNull Applicant applicant);
 
-    @NotNull List<Applicant> getAll();
+    @NotNull
+    List<Applicant> getAll();
+
+    Boolean parse() throws InterruptedException;
 
     void delete(@NotNull Long id);
 

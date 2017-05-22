@@ -44,6 +44,11 @@ public class ApplicantController {
         return applicantService.save(applicant);
     }
 
+    @RequestMapping(value = "/parsing")
+    public Boolean parsing(List<String>  command) throws InterruptedException {
+      return applicantService.parse();
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public Applicant update(@PathVariable Long id, @Valid @RequestBody Applicant applicant) {
         applicant.setId(id);

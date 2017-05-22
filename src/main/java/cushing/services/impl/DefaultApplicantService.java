@@ -1,5 +1,6 @@
 package cushing.services.impl;
 
+import cushing.component.Scrapping;
 import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;
@@ -25,6 +26,7 @@ public class DefaultApplicantService implements ApplicantService {
     @Autowired private VacancyService vacancyService;
     @Autowired private ApplicantRepository applicantRepository;
     @Autowired private OfficeService officeService;
+    @Autowired private Scrapping scrapping;
 
 
     @Nullable
@@ -68,5 +70,11 @@ public class DefaultApplicantService implements ApplicantService {
     public List<Applicant> getAll() {
         return applicantRepository.findAllByIsEnabledTrue();
     }
+
+    @Override
+    public Boolean parse() throws InterruptedException {
+        return null;
+    }
+
 
 }

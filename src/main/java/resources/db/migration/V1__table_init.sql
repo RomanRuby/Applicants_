@@ -12,8 +12,7 @@ CREATE TABLE offices (
 CREATE TABLE vacancies (
   id   BIGSERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
-  salary FLOAT,
-  description  VARCHAR
+  salary FLOAT
 );
 
 CREATE TABLE applicants (
@@ -23,6 +22,7 @@ CREATE TABLE applicants (
   second_name      VARCHAR NOT NULL,
   birth_date       DATE    NOT NULL,
   reference_resume VARCHAR,
+  description  VARCHAR,
   vacancy_id       BIGINT REFERENCES vacancies,
   office_id        BIGINT REFERENCES offices
 );

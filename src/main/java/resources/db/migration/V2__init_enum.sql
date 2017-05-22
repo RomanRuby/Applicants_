@@ -7,9 +7,9 @@ INSERT INTO offices ( name) VALUES ('cushing' );
 INSERT INTO offices ( name) VALUES ( 'zensoft');
 INSERT INTO offices ( name) VALUES ( 'dMetrics');
 
-INSERT INTO vacancies ( name, salary, description) VALUES ( 'java',100,'own');
-INSERT INTO vacancies ( name, salary, description) VALUES ( 'javascript',100,'own');
-INSERT INTO vacancies ( name, salary, description) VALUES ( 'hr',100,'own');
-INSERT INTO vacancies ( name, salary, description) VALUES ( 'qa', 100,'own');
-INSERT INTO vacancies ( name, salary, description) VALUES ( 'awaiting', 0,'');
+INSERT INTO vacancies ( name, salary) VALUES ( 'java',100);
+INSERT INTO vacancies ( name, salary) VALUES ( 'javascript',100);
+INSERT INTO vacancies ( name, salary) VALUES ( 'hr',100);
+INSERT INTO vacancies ( name, salary) VALUES ( 'qa', 100);
+INSERT INTO vacancies ( name, salary) VALUES ( 'awaiting', 0);
 

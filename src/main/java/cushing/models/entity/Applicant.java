@@ -34,25 +34,22 @@ public class Applicant extends ExcludeFieldModel {
     @Column(name = "second_name", nullable = false)
     private String secondName;
 
-    @NotNull(message = "Введите дату рождения")
     @Column(name = "birth_date", nullable = false)
     private Date birthDate = new Date();
 
     @Column(name = "reference_resume")
     private String referenceResume;
 
+    @Column(name = "description")
+    private String description;
+
     @NotNull
     @ManyToOne
     @JoinColumn(name = "vacancy_id")
     private Vacancy vacancy;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "office_id")
     private Office office;
-
-    public int getColumnCount() {
-        return 7;
-    }
 
 }

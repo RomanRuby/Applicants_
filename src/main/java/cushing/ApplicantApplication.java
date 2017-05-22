@@ -8,12 +8,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @SpringBootApplication
 @EnableJpaRepositories
-public class Applicant {
+public class ApplicantApplication {
+
 
 	public static void main(String[] args) {
-		SpringApplication.run(Applicant.class, args);
+		SpringApplication.run(ApplicantApplication.class, args);
 	}
 
 

@@ -19,7 +19,4 @@ public class Vacancy extends BaseDictionaryModel {
     @Column(name = "salary", nullable = false)
     private Double salary;
 
-    @Column(name = "description")
-    private String description;
-
 }
