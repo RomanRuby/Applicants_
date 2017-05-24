@@ -63,6 +63,11 @@ app.config(['$routeProvider', function ($routeProvider) {
             controller: "serviceCtrl",
             title: 'Служебные'
         })
+        .when("/parsing", {
+            templateUrl: "/views/main/parsing.html",
+            controller: "parsingCtrl",
+            title: 'parsing'
+        })
 
 
         .when("/error-404", {

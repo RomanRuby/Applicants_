@@ -7,18 +7,16 @@ import java.util.Map;
 /**
  * @author Roman Nagibov
  */
-public class ParserResourses implements Scrapping {
+public class ParserResourses {
 
-    @Override
     public Map<String, String> getInformation(List<String> command) {
         Map<String,String> sites = new HashMap<>();
 
         for(Specialization site : Specialization.values()){
         sites.put("sites",site.name());
-
     }
-        return sites;
 
+        return sites;
     }
 
     public enum Specialization {

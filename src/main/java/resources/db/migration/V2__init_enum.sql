@@ -7,6 +7,9 @@ INSERT INTO offices ( name) VALUES ('cushing' );
 INSERT INTO offices ( name) VALUES ( 'zensoft');
 INSERT INTO offices ( name) VALUES ( 'dMetrics');
 
+INSERT INTO resources ( name) VALUES ('praca.by' );
+INSERT INTO resources ( name) VALUES ( 'tut.by');
+
 INSERT INTO vacancies ( name, salary) VALUES ( 'java',100);
 INSERT INTO vacancies ( name, salary) VALUES ( 'javascript',100);
 INSERT INTO vacancies ( name, salary) VALUES ( 'hr',100);

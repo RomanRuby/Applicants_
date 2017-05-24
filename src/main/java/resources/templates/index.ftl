@@ -61,6 +61,7 @@
                 <li data-match-route="/dashboard"><a href="#/dashboard"><i class="fa fa-users"></i> Кандидаты</a></li>
                 <li data-match-route="/interview"><a href="#/tasks"><i class="fa fa-cogs"></i> Cобытия</a></li>
                 <li data-match-route="/service"><a href="#/service"><i class="fa fa-cogs"></i>Служебные</a></li>
+                <li data-match-route="/parsing"><a href="#/parsing"><i class="fa fa-cogs"></i>parsing</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <a  class="dropdown-toggle"  data-toggle="dropdown"  role="button" aria-haspopup="true" aria-expanded="false">Welcome ${username}  <span class="caret"  style="margin-top:50px" ></span></a>
@@ -123,6 +124,7 @@
 <script src="/app/main/controllers/immediate_tasks.js"></script>
 <script src="/app/main/controllers/tasks.js"></script>
 <script src="/app/main/controllers/service.js"></script>
+<script src="/app/main/controllers/parsing.js"></script>
 <script>
 
 </script>

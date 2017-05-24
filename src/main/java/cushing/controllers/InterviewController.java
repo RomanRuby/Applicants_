@@ -58,7 +58,6 @@ public class InterviewController {
     @RequestMapping(value = "/byApplicant/{id}")
     public List<Interview> getAllInterviewsByApplicants(@PathVariable Long id) {
         return interviewService.getAllInterviewsByApplicants(id);
-
     }
 
 }

@@ -9,6 +9,10 @@ CREATE TABLE offices (
   name VARCHAR NOT NULL
 );
 
+CREATE TABLE resources (
+  id   BIGSERIAL PRIMARY KEY,
+  name VARCHAR NOT NULL
+);
 CREATE TABLE vacancies (
   id   BIGSERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,

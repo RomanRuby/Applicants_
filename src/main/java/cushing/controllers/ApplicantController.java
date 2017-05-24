@@ -3,9 +3,11 @@ package cushing.controllers;
 import cushing.Loggable;
 import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
+import cushing.models.entity.Resource;
 import cushing.models.entity.Vacancy;
 import cushing.services.ApplicantService;
 import cushing.services.OfficeService;
+import cushing.services.ResourceService;
 import cushing.services.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
@@ -25,6 +27,7 @@ public class ApplicantController {
     @Autowired private ApplicantService applicantService;
     @Autowired private OfficeService officeService;
     @Autowired private VacancyService vacancyService;
+    @Autowired private ResourceService resourceService;
 
 
     @Loggable
@@ -42,11 +45,6 @@ public class ApplicantController {
     @RequestMapping(method = RequestMethod.POST)
     public Applicant save(@RequestBody @Valid Applicant applicant) {
         return applicantService.save(applicant);
-    }
-
-    @RequestMapping(value = "/parsing")
-    public Boolean parsing(List<String>  command) throws InterruptedException {
-      return applicantService.parse();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
@@ -68,6 +66,11 @@ public class ApplicantController {
     @RequestMapping(value = "/vacancies")
     public List<Vacancy> getVacancies() {
         return vacancyService.getVacancies();
+    }
+
+    @RequestMapping(value = "/resources")
+    public List<Resource> getResources() {
+        return resourceService.getResources();
     }
 
     @Secured("ROLE_ADMIN")

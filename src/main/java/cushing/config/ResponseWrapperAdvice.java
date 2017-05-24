@@ -1,4 +1,4 @@
-package cushing.controllers;
+package cushing.config;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
