@@ -1,4 +1,4 @@
-package cushing.component;
+package cushing.component.Parser;
 
 import java.util.HashMap;
 import java.util.List;

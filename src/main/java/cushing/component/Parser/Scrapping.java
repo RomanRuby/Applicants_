@@ -1,4 +1,4 @@
-package cushing.component;
+package cushing.component.Parser;
 
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;

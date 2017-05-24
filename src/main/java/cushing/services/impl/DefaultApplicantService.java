@@ -1,6 +1,6 @@
 package cushing.services.impl;
 
-import cushing.component.Scrapping;
+import cushing.component.Parser.Scrapping;
 import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;
@@ -26,7 +26,6 @@ public class DefaultApplicantService implements ApplicantService {
     @Autowired private VacancyService vacancyService;
     @Autowired private ApplicantRepository applicantRepository;
     @Autowired private OfficeService officeService;
-    @Autowired private Scrapping scrapping;
 
 
     @Nullable

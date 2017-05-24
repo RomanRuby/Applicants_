@@ -27,14 +27,11 @@ public class ParsingController {
     @Autowired private VacancyService vacancyService;
     @Autowired private ResourceService resourceService;
 
-//        @RequestMapping(value = "/applicants", method = RequestMethod.POST)
-//    public Boolean parsing1(RequestBody ParserDto parserDto) {
-//    }
 
     @RequestMapping(value = "/applicants", method = RequestMethod.POST)
-    public Boolean parsing(@RequestBody ParserDto parserDto) {
+    public Boolean parsing(@RequestBody ParserDto parserDto)  {
        Resource resource = resourceService.get(parserDto.getResource().get(0).getId());
-        List<Resource > resourceList = new LinkedList<>();
+        List<Resource> resourceList = new LinkedList<>();
         resourceList.add(resource);
         return parserService.parceInformation(resourceList, vacancyService.get(parserDto.getVacancy().getId()));
     }

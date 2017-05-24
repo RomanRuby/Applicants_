@@ -1,6 +1,5 @@
-package cushing.component;
+package cushing.component.Parser;
 
-import cushing.component.impl.Jsoup.JsoupParserPracaBy;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;
 import cushing.services.ApplicantService;
@@ -22,29 +21,26 @@ import java.util.Map;
 public class ParserPracaBy implements Scrapping {
 
     @Autowired private ApplicantService applicantService;
-    @Autowired private JsoupParserPracaBy jsoupParserPracaBy;
+
 
     @Override
-    public Map<String,Applicant> parse(Vacancy vacancy) throws IOException {
+    public Map<String, Applicant> parse(Vacancy vacancy) throws IOException {
 
         Document document = null;
-        if(vacancy.getName().equals("java")){
-            document = jsoupParserPracaBy.getDocumentJava();
-        }
-        if(vacancy.getName().equals("javascript")){
-            document = jsoupParserPracaBy.getDocumentJavaScript();
-        }
+        Jsoup.connect(String.valueOf("https://praca.by/search/resumes/?search%5Bquery%5D="+vacancy.getName()
+                +"&search%5Bquery-text-params%5D%5Bheadline%5D=1&form-submit-btn=%D0%9D%D0%B0%D0%B9%D1%82%D0%B8")).get();
 
-        Elements elementsByAttributeValueStarting = document.getElementsByClass("search-list").get(0).getElementsByAttributeValueStarting("href", "http");
+
+        Elements elementsByAttributeValueStarting = document.getElementsByClass("search-list").
+                get(0).getElementsByAttributeValueStarting("href", "http");
         Map<String, Applicant> applicants = new HashMap<>();
-        String applicant;
         for (Element elements : elementsByAttributeValueStarting) {
             String[] parts = elements.toString().split("\"");
             Document document_res = Jsoup.connect(parts[3]).get();
             String string = document_res.toString();
             String[] parts_1 = string.split("<meta property=\"og:description\" content=\"");
             String[] parts_2 = parts_1[1].split("\"");
-            applicant = (parts_2[0] + parts[3]);
+            String  applicant = (parts_2[0] + parts[3]);
             String[] applicantDetails = "\\.".split(applicant);
 
             vacancy.setId(1L);
