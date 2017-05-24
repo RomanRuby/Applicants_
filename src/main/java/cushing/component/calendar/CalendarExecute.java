@@ -39,7 +39,7 @@ public class CalendarExecute {
      * Directory to store user credentials.
      */
     private static final java.io.File DATA_STORE_DIR =
-            new java.io.File(System.getProperty("user.home"), ".store/calendar_sample");
+            new java.io.File(System.getProperty("user.dir"), "/src/java//resources");
 
     /**
      * Global instance of the {@link DataStoreFactory}. The best practice is to make it a single
@@ -68,13 +68,13 @@ public class CalendarExecute {
         // load client secrets
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY,
                 new InputStreamReader(CalendarExecute.class.getResourceAsStream("/client_secrets.json")));
-        if (clientSecrets.getDetails().getClientId().startsWith("Enter")
-                || clientSecrets.getDetails().getClientSecret().startsWith("Enter")) {
-            System.out.println(
-                    "Enter Client ID and Secret from https://code.google.com/apis/console/?api=calendar "
-                            + "into calendar-cmdline-sample/src/main/resources/client_secrets.json");
-            System.exit(1);
-        }
+//        if (clientSecrets.getDetails().getClientId().startsWith("Enter")
+//                || clientSecrets.getDetails().getClientSecret().startsWith("Enter")) {
+//            System.out.println(
+//                    "Enter Client ID and Secret from https://code.google.com/apis/console/?api=calendar "
+//                            + "into calendar-cmdline-sample/src/main/resources/client_secrets.json");
+//            System.exit(1);
+//        }
         // set up authorization code flow
         GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
                 httpTransport, JSON_FACTORY, clientSecrets,

@@ -46,6 +46,7 @@ public class AsyncTaskParsePeople implements Scrapping {
             String[] applicantDetails = "\\.".split(applicant);
 
             Vacancy vacancy = new Vacancy();
+
             vacancy.setId(1L);
 
             applicants.put(applicantDetails[1] + applicantDetails[2] + applicantDetails[3],

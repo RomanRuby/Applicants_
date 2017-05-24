@@ -10,13 +10,13 @@ import com.google.api.services.calendar.model.*;
 
 public class View {
 
-    static void header(String name) {
+    public static void header(String name) {
         System.out.println();
         System.out.println("============== " + name + " ==============");
         System.out.println();
     }
 
-    static void display(CalendarList feed) {
+    public static void display(CalendarList feed) {
         if (feed.getItems() != null) {
             for (CalendarListEntry entry : feed.getItems()) {
                 System.out.println();
@@ -26,7 +26,7 @@ public class View {
         }
     }
 
-    static void display(Events feed) {
+    public static void display(Events feed) {
         if (feed.getItems() != null) {
             for (Event entry : feed.getItems()) {
                 System.out.println();
@@ -44,7 +44,7 @@ public class View {
         }
     }
 
-    static void display(Calendar entry) {
+    public static void display(Calendar entry) {
         System.out.println("ID: " + entry.getId());
         System.out.println("Summary: " + entry.getSummary());
         if (entry.getDescription() != null) {
@@ -52,7 +52,7 @@ public class View {
         }
     }
 
-    static void display(Event event) {
+    public static void display(Event event) {
         if (event.getStart() != null) {
             System.out.println("Start Time: " + event.getStart());
         }
