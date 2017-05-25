@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * @author Roman Nagibov
  */
-public interface Scrapping {
+public interface Parser {
     Map<String,Applicant> parse(Vacancy vacancy) throws IOException;
 
 }

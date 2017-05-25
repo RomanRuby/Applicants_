@@ -1,6 +1,5 @@
 package cushing.models.dto;
 
-import cushing.models.entity.Resource;
 import cushing.models.entity.Vacancy;
 import lombok.AllArgsConstructor;
 import lombok.Data;

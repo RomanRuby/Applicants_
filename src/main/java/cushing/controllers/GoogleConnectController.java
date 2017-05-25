@@ -45,18 +45,16 @@ public class GoogleConnectController {
     private static final String APPLICATION_NAME = "client";
     private static HttpTransport httpTransport;
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-
     private static com.google.api.services.calendar.Calendar client;
-
-    static final java.util.List<Calendar> addedCalendarsUsingBatch = Lists.newArrayList();
-    GoogleClientSecrets clientSecrets;
+    private static final java.util.List<Calendar> addedCalendarsUsingBatch = Lists.newArrayList();
+    private GoogleClientSecrets clientSecrets;
     GoogleAuthorizationCodeFlow flow;
     Credential credential;
-
     private String clientId = "51516418742-1k67qb4aj7vseb45lj9pcf24lcsfkfve.apps.googleusercontent.com";
     private String clientSecret = "cVeK4gTcwz-NIocVKVJfmVsD";
     private String redirectURI = "http://localhost:8080/GoogleConnection/connect/google.do";
     private Set<Event> events = new HashSet<Event>();
+
 
     public void setEvents(Set<Event> events) {
         this.events = events;

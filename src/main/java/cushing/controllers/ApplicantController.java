@@ -3,7 +3,6 @@ package cushing.controllers;
 import cushing.Loggable;
 import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
-import cushing.models.entity.Resource;
 import cushing.models.entity.Vacancy;
 import cushing.services.ApplicantService;
 import cushing.services.OfficeService;

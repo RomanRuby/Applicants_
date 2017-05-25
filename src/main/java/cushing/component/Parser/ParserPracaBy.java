@@ -1,53 +1,53 @@
 package cushing.component.Parser;
 
+import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;
-import cushing.services.ApplicantService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Date;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Roman Nagibov
  */
-@Component
-public class ParserPracaBy implements Scrapping {
-
-    @Autowired private ApplicantService applicantService;
-
+public class ParserPracaBy implements Parser {
 
     @Override
     public Map<String, Applicant> parse(Vacancy vacancy) throws IOException {
+        Map<String, Applicant> applicants = new TreeMap<>();
+        for (int i = 2; i < 3; i++) {
+            Document document = Jsoup.connect(String.valueOf("https://praca.by/search/resumes/?page=" + i + "&search[query]=" + vacancy.getName()
+                    + "=3&search[query]=java&search[query-text-params][headline]=1&form-submit-btn=Найти")).get();
 
-        Document document = null;
-        Jsoup.connect(String.valueOf("https://praca.by/search/resumes/?search%5Bquery%5D="+vacancy.getName()
-                +"&search%5Bquery-text-params%5D%5Bheadline%5D=1&form-submit-btn=%D0%9D%D0%B0%D0%B9%D1%82%D0%B8")).get();
+            Elements paths = document.getElementsByClass("search-list");
+            if (paths.size() == 0) {
+                break;
+            }
 
+            Elements elementsByAttributeValueStarting = paths.
+                    get(0).getElementsByAttributeValueStarting("href", "http");
 
-        Elements elementsByAttributeValueStarting = document.getElementsByClass("search-list").
-                get(0).getElementsByAttributeValueStarting("href", "http");
-        Map<String, Applicant> applicants = new HashMap<>();
-        for (Element elements : elementsByAttributeValueStarting) {
-            String[] parts = elements.toString().split("\"");
-            Document document_res = Jsoup.connect(parts[3]).get();
-            String string = document_res.toString();
-            String[] parts_1 = string.split("<meta property=\"og:description\" content=\"");
-            String[] parts_2 = parts_1[1].split("\"");
-            String  applicant = (parts_2[0] + parts[3]);
-            String[] applicantDetails = "\\.".split(applicant);
+            for (Element elements : elementsByAttributeValueStarting) {
+                String[] allInformation = elements.toString().split("\"");
+                String[] commonInformation = Jsoup.connect(allInformation[3]).get().
+                        toString().split("<meta property=\"og:description\" content=\"");
+                String[] applicantDetails = commonInformation[1].split("\"")[0].split("\\.");
 
-            vacancy.setId(1L);
-            applicants.put(applicantDetails[1] + applicantDetails[2] + applicantDetails[3],
-                    (applicantService.save(new Applicant(applicantDetails[0],
-                            "-", null, applicantDetails[4] + applicantDetails[5],
-                            applicantDetails[1] + applicantDetails[2] + applicantDetails[3], vacancy, null))));
+                Office office = new Office();
+                office.setId(1L);
+
+                applicants.put(applicantDetails[1] + applicantDetails[2] + allInformation[3],
+                        (new Applicant(applicantDetails[0],
+                                "undefined", new Date(), allInformation[3],
+                                applicantDetails[1] + applicantDetails[2], vacancy, office)));
+
+            }
 
         }
 

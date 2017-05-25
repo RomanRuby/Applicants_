@@ -1,6 +1,5 @@
 package cushing.services.impl;
 
-import cushing.component.Parser.Scrapping;
 import cushing.models.dictionary.Office;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;

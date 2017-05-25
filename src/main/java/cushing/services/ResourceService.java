@@ -1,6 +1,5 @@
 package cushing.services;
 
-import cushing.models.entity.Resource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -11,8 +10,7 @@ import java.util.List;
  */
 public interface ResourceService {
 
-    @Nullable
-    Resource get(@NotNull Long id);
+    @Nullable Resource get(@NotNull Long id);
 
     @Nullable  Resource save(@NotNull Resource resource);
 

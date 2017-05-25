@@ -15,7 +15,6 @@ app.controller('parsingCtrl', function ($scope, ApiService, $timeout, $location)
             $scope.br = {};
             $scope.newParsing = {};
             $("#modalAddParsing").modal('hide');
-          //  window.location.reload(true);
         }, function (br) {
             console.log(br);
             $scope.br = br;

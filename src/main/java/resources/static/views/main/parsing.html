@@ -2,7 +2,17 @@
     <div class="jumbotron">
         <div class="panel-heading">
             <a class="btn btn-primary" data-toggle="modal" data-target="#modalAddParsing" ng-click="">
-                <i class="fa fa-user-plus"></i> Добавить</a>
+                <i class="fa fa-user-plus"></i> Добавить парсинг</a>
+        </div>
+        <div>
+            <h4 class="modal-title">Сайты</h4>
+            <table>
+            <tbody>
+        <tr ng-repeat="resource in resources">
+            <td>{{resource.name}}</td>
+        </tr>
+            </tbody>
+            </table>
         </div>
                     <!-- Modal to add applicants -->
                     <div class="modal fade" id="modalAddParsing" tabindex="-1" role="dialog" aria-labelledby="modalAddLabel"
@@ -12,7 +22,7 @@
                                 <div class="modal-header">
                                     <button  type="button" class="close" data-dismiss="modal" aria-label="Закрыть"><span
                                             aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="modalAddLabel">Интервью</h4>
+                                    <h4 class="modal-title" id="modalAddLabel">Парсинг</h4>
                                 </div>
                                 <form ng-submit="addParsing()">
 
@@ -33,16 +43,12 @@
                                                 </div>
                                                 <div class="form-group" ng-class="{'has-error': br.resource.name}">
                                                     <label>resources</label>
-                                                    <tbody>
-                                                    <tr ng-repeat="resource in resources " value="{{resource.id}}  ">
-                                                    <td><div class="form-group">
-                                                        <label class="checkbox-inline">
-                                                            <input type="checkbox" name="resource" ng-model="newParsing.resource.id" value="{{resource.id}}">{{resource.name}}
-                                                        </label>
-                                                    </div>
-                                                    </td>
-                                                    </tr>
-                                                    </tbody>
+
+                                                    <label ng-repeat="resource in resources ">
+                                                        <input type="checkbox" checklist-model="newParsing.resource.id" class="form-control" checklist-value="{{resource.id}}"> {{resource.name}}
+                                                    </label>
+
+
                                                 </div>
 
                                             </div>

@@ -1,6 +1,5 @@
 package cushing.services.impl;
 
-import cushing.models.entity.Resource;
 import cushing.repository.ResourceRepository;
 import cushing.services.ResourceService;
 import org.jetbrains.annotations.NotNull;
