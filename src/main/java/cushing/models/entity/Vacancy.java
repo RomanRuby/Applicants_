@@ -19,4 +19,14 @@ public class Vacancy extends BaseDictionaryModel {
     @Column(name = "salary", nullable = false)
     private Double salary;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "necessity", nullable = false)
+    private Necessity necessity;
+
+    public enum Necessity {
+        ALLVACANCY,
+        POSSIBLE,
+        CLAIMED
+    }
+
 }

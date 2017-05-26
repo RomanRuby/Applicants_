@@ -16,7 +16,8 @@ CREATE TABLE resources (
 CREATE TABLE vacancies (
   id   BIGSERIAL PRIMARY KEY,
   name VARCHAR NOT NULL,
-  salary FLOAT
+  salary FLOAT,
+  necessity VARCHAR NOT NULL
 );
 
 CREATE TABLE applicants (

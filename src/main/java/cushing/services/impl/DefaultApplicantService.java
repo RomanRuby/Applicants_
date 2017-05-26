@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -50,6 +52,17 @@ public class DefaultApplicantService implements ApplicantService {
     @Transactional
     @Nullable
     @Override
+    public Collection<Applicant> save(@NotNull Collection<Applicant> applicants) {
+        Collection<Applicant> applicantsAll = new ArrayList<>();
+        for(Applicant applicant : applicants){
+            applicantsAll.add( save(applicant));
+        }
+        return applicantsAll;
+    }
+
+    @Transactional
+    @Nullable
+    @Override
     public Applicant update(@NotNull Applicant applicant) {
         return applicantRepository.save(applicant);
     }
@@ -68,11 +81,5 @@ public class DefaultApplicantService implements ApplicantService {
     public List<Applicant> getAll() {
         return applicantRepository.findAllByIsEnabledTrue();
     }
-
-    @Override
-    public Boolean parse() throws InterruptedException {
-        return null;
-    }
-
 
 }

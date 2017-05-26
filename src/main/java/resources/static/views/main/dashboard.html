@@ -83,8 +83,11 @@
                         <td>{{applicant.office.name}}</td>
                         <td>{{applicant.vacancy.name}}</td>
                         <td>{{applicant.vacancy.salary}}</td>
-                        <td>{{applicant.referenceResume }}</td>
-                        <td>{{applicant.vacancy.description}}</td>
+                        <td><a ng-href="{{applicant.referenceResume}}">
+                            {{applicant.referenceResume}}
+                        </a>
+                        </td>
+                        <td>{{applicant.description}}</td>
                     </tr>
                     </tbody>
                 </table>

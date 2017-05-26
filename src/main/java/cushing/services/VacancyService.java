@@ -13,7 +13,7 @@ public interface VacancyService {
 
     @Nullable Vacancy get(@NotNull Long id);
 
-    @Nullable  Vacancy save(@NotNull Vacancy vacancy);
+    @Nullable Vacancy save(@NotNull Vacancy vacancy);
 
     @NotNull List<Vacancy> getAll();
 

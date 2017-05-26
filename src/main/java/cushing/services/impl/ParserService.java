@@ -5,48 +5,57 @@ import cushing.component.Parser.ParserPracaBy;
 import cushing.models.entity.Applicant;
 import cushing.models.entity.Vacancy;
 import cushing.services.ApplicantService;
+import cushing.services.VacancyService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Roman Nagibov
  */
 @Service
-public class ParserService   {
+public class ParserService {
 
-    @Autowired private ParserPracaBy parserPracaBy;
     @Autowired private ApplicantService applicantService;
+    @Autowired private VacancyService vacancyService;
 
 
-    public Boolean parseInformation(List<String> resources, Vacancy vacancy)  {
-        try {
-            List<Applicant> applicantsList = new ArrayList<>();
-        Map<String, Applicant> applicants = new HashMap<>();
-        for (String resource : resources) {
-            Resource.getByAlias(resource).parse(vacancy);
+    public Boolean parseInformation(List<String> resources, String vacancy) {
+        for (Vacancy vacancyInTable : vacancyService.getAll()) {
+            if (vacancyInTable.getName().equals(vacancy)) {
+                try {
+                    Set<Applicant> applicants = new HashSet<>();
+
+                    for (String resource : resources) {
+                        applicants = Resource.getByAlias(resource).parse(vacancyInTable);
+                    }
+
+                    applicantService.save(applicants);
+                } catch (IOException e) {
+                    return false;
+
+                }
+                return true;
+            }
+
         }
-
-        applicantsList.addAll(applicants.values());
-        for(Applicant  applicant : applicantsList) {
-            applicantService.save(applicant);
-        }
-        } catch (IOException e) {
-            return false;
-
-        }
-        return true;
+        return false;
     }
 
+    public List<String> getResource() {
+        List<String> resources = new ArrayList<>();
+        for (Resource resource : Resource.values()) {
+            resources.add(resource.getAlias());
+        }
+
+        return resources;
+    }
 
     enum Resource {
-        TYT_BY("tut.by", new TytByParser()),
+        //  TYT_BY("tut.by", new TytByParser()),
         PRACA_BY("praca.by", new ParserPracaBy());
 
         @Getter

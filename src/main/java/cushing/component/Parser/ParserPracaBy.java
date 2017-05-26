@@ -7,22 +7,23 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Roman Nagibov
  */
+@Component
 public class ParserPracaBy implements Parser {
 
     @Override
-    public Map<String, Applicant> parse(Vacancy vacancy) throws IOException {
-        Map<String, Applicant> applicants = new TreeMap<>();
+    public Set<Applicant> parse(Vacancy vacancy) throws IOException {
+        Set<Applicant> applicants = new HashSet<>();
         for (int i = 2; i < 3; i++) {
-            Document document = Jsoup.connect(String.valueOf("https://praca.by/search/resumes/?page=" + i + "&search[query]=" + vacancy.getName()
+            Document document = Jsoup.connect
+                    (String.valueOf("https://praca.by/search/resumes/?page=" + i + "&search[query]=" + vacancy
                     + "=3&search[query]=java&search[query-text-params][headline]=1&form-submit-btn=Найти")).get();
 
             Elements paths = document.getElementsByClass("search-list");
@@ -42,10 +43,9 @@ public class ParserPracaBy implements Parser {
                 Office office = new Office();
                 office.setId(1L);
 
-                applicants.put(applicantDetails[1] + applicantDetails[2] + allInformation[3],
-                        (new Applicant(applicantDetails[0],
+                applicants.add(new Applicant(applicantDetails[0],
                                 "undefined", new Date(), allInformation[3],
-                                applicantDetails[1] + applicantDetails[2], vacancy, office)));
+                                applicantDetails[1] + applicantDetails[2], vacancy, office));
 
             }
 
